@@ -39,7 +39,7 @@ const Cadastro = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
        <Image
-        source={require('../assets/logopulseplataform.png')}
+        source={require('../assets/logo-floralis.png')}
         style={styles.logo}
       />
       <Text style={styles.titulo}>CADASTRE-SE PARA TER ACESSO AO NOSSO SITE:</Text>
@@ -104,36 +104,57 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
-    backgroundColor: 'black',
-    color: 'white'
+    backgroundColor: '#F5FFF3', // Fundo claro e natural
+  },
+  logo: {
+    width: 120,
+    height: 60,
+    marginBottom: 20,
+  },
+  titulo: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#2C5E29', // Verde escuro para destaque
+    marginBottom: 20,
+    textAlign: 'center',
   },
   label: {
     marginBottom: 5,
     fontSize: 16,
-    color: 'white'
+    color: '#2C5E29', // Verde escuro
+    alignSelf: 'flex-start',
   },
   input: {
     width: '100%',
-    height: 40,
+    height: 45,
     borderWidth: 1,
-    borderColor: 'red',
-    borderRadius: 5,
-    marginBottom: 10,
+    borderColor: '#4CAF50', // Verde suave para bordas
+    borderRadius: 8,
+    marginBottom: 15,
     paddingHorizontal: 10,
-    color: 'white' 
+    backgroundColor: '#FFFFFF', // Fundo branco para contraste
+    color: '#2C5E29', // Verde escuro para texto
+    fontSize: 16,
   },
-  titulo: {
-    fontSize: 20,
+  button: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#4CAF50', // Botão verde
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+    marginTop: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 4, // Sombras no Android
+  },
+  buttonText: {
+    color: '#FFF', // Texto branco
+    fontSize: 18,
     fontWeight: 'bold',
-    color: 'white',
-    marginBottom: 20,
-    textAlign: 'center'
   },
-  logo: {
-    width: 90,
-    height: 40,
-    marginBottom: 20,
-  }
 });
 
 export default Cadastro;

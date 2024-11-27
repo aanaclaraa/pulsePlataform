@@ -25,7 +25,7 @@ export default function Login() {
   return (
     <View style={styles.container}>
       <Animated.Image
-        source={require('../assets/logo-usuario.png')}
+        source={require('../assets/usuario.png')}
         style={[styles.logo, { opacity: logoOpacity }]}
       />
       <Text style={styles.title}>Faça login para acessar o aplicativo</Text>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#F5FFF3', // Fundo claro e natural
   },
   logo: {
     width: 150,
@@ -67,42 +67,52 @@ const styles = StyleSheet.create({
     marginBottom: 35,
   },
   title: {
-    fontSize: 18,
+    fontSize: 20,
     marginBottom: 20,
     textAlign: 'center',
-    color: 'red', 
+    color: '#2C5E29', // Verde escuro para o texto
+    fontWeight: 'bold',
   },
   input: {
     width: '80%',
-    height: 40,
+    height: 45,
     borderWidth: 1,
-    borderColor: 'red',
-    borderRadius: 5,
-    marginBottom: 10,
+    borderColor: '#4CAF50', // Verde suave para bordas
+    borderRadius: 8,
+    marginBottom: 15,
     paddingHorizontal: 10,
-    color: 'white', 
+    backgroundColor: '#FFFFFF', // Fundo branco para campos de texto
+    color: '#2C5E29', // Verde escuro para o texto
+    fontSize: 16,
   },
   button: {
     width: '80%',
-    height: 40,
-    backgroundColor: 'red',
+    height: 45,
+    backgroundColor: '#4CAF50', // Verde suave para o botão
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 8,
     marginBottom: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 4, // Para sombra no Android
   },
   buttonText: {
-    color: '#fff',
+    color: '#FFF', // Texto branco para contraste
     fontSize: 16,
+    fontWeight: 'bold',
   },
   errorMessage: {
-    color: 'red', 
+    color: '#D32F2F', // Vermelho para erro
     marginTop: 10,
+    fontSize: 14,
   },
   cadastrarTexto: {
-    color: "white"
-  }
+    color: '#2C5E29', // Verde escuro para o texto de cadastro
+    fontSize: 16,
+    marginTop: 15,
+    textDecorationLine: 'underline', // Adiciona um sublinhado para indicar interatividade
+  },
 });
-
-
-

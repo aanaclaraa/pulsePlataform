@@ -3,16 +3,18 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { useContext } from "react";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useBatteryLevel } from 'expo-battery';
 
 
-import Home from "./Home";
-import Login from "./Login";
-import Cadastro from "./Cadastro";
+import Home from "./Home"; 
+import Login from "./Login"; 
+import Cadastro from "./Cadastro"; 
 import TelaInicial from "./TelaInicial";
-import Pagamento from "./Pagamento";
-import Premium from "./Premium";
-import MinhaLista from "./MinhaLista";
+import MinhasPlantas from "./MinhasPlantas"; 
+import Sobre from "./Sobre"; 
+import Relatorio from "./Relatorio";
+import FaleConosco from "./FaleConosco";
+import Dicas from "./Dicas";
+import Projeto from "./Projeto";
 import { UserContext } from './Context/UserContext';
 
 
@@ -49,46 +51,45 @@ export default function Rotas() {
         }}
         />
 
-        <Tab.Screen name="TelaInicial" 
-        component={TelaInicial} 
+        <Tab.Screen name="MinhasPlantas" 
+        component={MinhasPlantas} 
          options={{
-          tabBarLabel: 'Versão gratis',
+          tabBarLabel: 'Minhas Plantas',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="music-circle" color={color} size={size} />
+            <MaterialCommunityIcons name="home-circle-outline" color={color} size={size} />
           ),
         }}
         />
 
-        <Tab.Screen name="MinhaLista" 
-          component={MinhaLista} 
-          options={{
-            tabBarLabel: 'Minha Lista',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="book-edit" color={color} size={size} />
-          ),
-        }}
-        />
-
-        <Tab.Screen name="Pagamento" 
-        component={Pagamento} 
+        <Tab.Screen name="Sobre" 
+        component={Sobre} 
          options={{
-          tabBarLabel: 'Nova Versão',
+          tabBarLabel: 'Sobre',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="cash-fast" color={color} size={size} />
+            <MaterialCommunityIcons name="home-circle-outline" color={color} size={size} />
           ),
         }}
         />
 
-         <Tab.Screen name="Premium" 
-        component={Premium} 
+        <Tab.Screen name="Relatorio" 
+        component={Relatorio} 
          options={{
-          tabBarLabel: 'Premium da semana',
+          tabBarLabel: 'Relatorio',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="motion-play" color={color} size={size} />
+            <MaterialCommunityIcons name="home-circle-outline" color={color} size={size} />
           ),
         }}
         />
 
+        <Tab.Screen name="Dicas" 
+        component={Dicas} 
+         options={{
+          tabBarLabel: 'Dicas',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home-circle-outline" color={color} size={size} />
+          ),
+        }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );

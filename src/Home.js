@@ -1,37 +1,51 @@
-import React, { useContext } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { UserContext } from './Context/UserContext';
+import React from 'react';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView, Image } from 'react-native';
 
-const Home = ({ navigation }) => {
-  const { usuario } = useContext(UserContext);
-
+const Home = ({ navigation }) => { 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../assets/logopulseplataform.png')}
-        style={styles.logo}
-      />
-      <Text style={styles.welcome}>Bem-Vindo ao Pulse Platform</Text>
-      
-      <View style={styles.buttonContainer}>
-        <Text style={styles.text}>Acesse nossas músicas gratuitas</Text>
-        <TouchableOpacity
-          style={[styles.button, { backgroundColor: '#FF5050' }]}
-          onPress={() => navigation.navigate('TelaInicial')}
-        >
-          <Text style={styles.buttonText}>Acessar Gratuitamente</Text>
-        </TouchableOpacity>
+      {/* Cabeçalho */}
+      <View style={styles.header}>
+        <Image
+          source={require('../assets/logo-floralis.png')}
+          style={styles.logo}
+        />
+        <View style={styles.nav}>
+          <Text style={styles.navItem}>Tela Inicial</Text>
+          <Text style={styles.navItem}>Sobre</Text>
+          <Text style={styles.navItem}>Cuidados</Text>
+        </View>
       </View>
-      
-      <View style={styles.buttonContainer}>
-        <Text style={styles.text}>Experimente a versão Premium</Text>
-        <TouchableOpacity
-          style={[styles.button, { backgroundColor: '#FF5050ed' }]}
-          onPress={() => navigation.navigate('Pagamento')}
-        >
-          <Text style={styles.buttonText}>Experimentar Premium</Text>
+
+      {/* Banner Principal */}
+      <ImageBackground 
+        source={{ uri: 'https://p2.trrsf.com/image/fget/cf/1200/900/middle/images.terra.com/2023/02/28/fundo-de-planta-de-casa-verde-para-amantes-de-plantas-qxw5pp3r4wmq.jpg' }} 
+        style={styles.banner}
+        imageStyle={styles.bannerImage}
+      >
+        <Text style={styles.bannerText}>Seja Bem-Vindo a Floralis</Text>
+      </ImageBackground>
+
+      {/* Seção de Conteúdo */}
+      <ScrollView style={styles.content}>
+        <TouchableOpacity style={styles.card}>
+          <Text style={styles.cardTitle}>Conheça o mundo das Plantas</Text>
         </TouchableOpacity>
-      </View>
+        <TouchableOpacity style={styles.card}>
+          <Text style={styles.cardTitle}>Cuidados que sua Planta Precisa</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.card}>
+          <Text style={styles.cardTitle}>Ver novo Projeto</Text>
+        </TouchableOpacity>
+        
+        {/* Botão para navegar para a tela inicial */}
+        <TouchableOpacity 
+          style={styles.button} 
+          onPress={() => navigation.navigate('TelaInicial')} // Navegar para a tela inicial
+        >
+          <Text style={styles.buttonText}>Ir para a Tela Inicial</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };
@@ -39,48 +53,89 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#F5FFF3', // Fundo suave e natural
+  },
+  header: {
+    backgroundColor: '#A5D6A7', // Verde suave para o cabeçalho
+    paddingTop: 20, // Reduzido o padding superior para um cabeçalho menor
+    paddingBottom: 10, // Reduzido o padding inferior
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    justifyContent: 'center',
+    elevation: 3, // Sombra mais leve para o cabeçalho
+    borderBottomLeftRadius: 10, // Arredondamento mais sutil
+    borderBottomRightRadius: 10, // Arredondamento mais sutil
   },
   logo: {
-    width: 250,
-    height: 125,
-    marginBottom: 40,
-    resizeMode: 'contain',
+    width: 50, // Diminuído o tamanho do logo
+    height: 60, // Diminuído o tamanho do logo
+    resizeMode: 'contain', 
   },
-  welcome: {
-    fontSize: 28,
-    color: '#FFF',
-    marginBottom: 20,
-    textAlign: 'center',
-    fontFamily: 'Roboto', 
+  nav: {
+    flexDirection: 'row',
   },
-  text: {
-    fontSize: 18,
-    color: '#FFF',
-    marginBottom: 10,
-    textAlign: 'center',
-    fontFamily: 'Roboto', 
+  navItem: {
+    color: '#1B5E20', // Tom de verde mais forte para o texto
+    marginHorizontal: 15,
+    fontSize: 14, // Fonte menor
+    fontWeight: 'bold',
+    textTransform: 'uppercase', // Deixa os itens em maiúsculo para dar ênfase
+    paddingVertical: 4, // Menos espaço ao redor dos itens de navegação
+    borderBottomWidth: 1, // Linha mais fina embaixo
+    borderBottomColor: '#388E3C', // Adiciona uma linha embaixo para destaque
   },
-  buttonContainer: {
-    marginBottom: 20,
-    width: '80%',
-  },
-  button: {
-    borderRadius: 25,
-    height: 50,
+  banner: {
+    height: 250, // Altura aumentada para destaque
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 8, 
+  },
+  bannerImage: {
+    opacity: 0.8, // Deixa a imagem mais visível
+  },
+  bannerText: {
+    color: '#FFF',
+    fontSize: 24, // Fonte menor para o texto do banner
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textShadowColor: '#2C5E29',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 6,
+  },
+  content: {
+    padding: 20,
+  },
+  card: {
+    backgroundColor: '#E8F5E9', // Fundo claro para contraste
+    borderWidth: 1,
+    borderColor: '#81C784', // Verde mais suave para bordas
+    borderRadius: 12, // Borda mais arredondada para um efeito mais suave
+    padding: 18, // Diminuído o padding do card
+    marginVertical: 12, // Aumento da margem para maior espaçamento entre os cards
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2, // Menos opacidade da sombra
+    shadowRadius: 4,
+    elevation: 4, // Elevação mais suave para Android
+  },
+  cardTitle: {
+    color: '#388E3C',
+    fontSize: 20, // Fonte reduzida para os títulos
+    fontWeight: 'bold',
+    marginBottom: 6, // Menos espaço abaixo do título
+  },
+  button: {
+    backgroundColor: '#388E3C', // Cor verde para o botão
+    paddingVertical: 12,
+    borderRadius: 8,
+    marginTop: 20, // Espaçamento acima do botão
+    alignItems: 'center',
   },
   buttonText: {
-    fontSize: 18,
     color: '#FFF',
-    fontFamily: 'Roboto', 
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
 export default Home;
-
-

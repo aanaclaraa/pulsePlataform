@@ -1,159 +1,94 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, ScrollView, Image, TouchableOpacity, View, Alert } from 'react-native';
+import { Text, StyleSheet, ScrollView, Image, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import NetInfo from "@react-native-community/netinfo";
 
-const MusicItem = ({ item, onPress }) => (
-  <TouchableOpacity style={styles.item} onPress={() => onPress(item.title)}>
+const PlantItem = ({ item, onPress }) => (
+  <TouchableOpacity style={styles.item} onPress={() => onPress(item.name)}>
     <Image source={item.image} style={styles.image} />
-    <Text style={styles.title}>{item.title}</Text>
-    {item.artist && <Text style={styles.artist}>{item.artist}</Text>}
-    <TouchableOpacity style={styles.playButton} onPress={() => onPress(item.title)}>
-      <Text style={styles.playButtonText}>▶</Text>
-    </TouchableOpacity>
+    <Text style={styles.title}>{item.name}</Text>
+    {item.description && <Text style={styles.description}>{item.description}</Text>}
   </TouchableOpacity>
 );
 
 const TelaInicial = () => {
   const navigation = useNavigation();
-  const [isConnected, setIsConnected] = useState(true); 
+  const [isConnected, setIsConnected] = useState(true);
 
   useEffect(() => {
-
     const unsubscribe = NetInfo.addEventListener(state => {
       setIsConnected(state.isConnected);
     });
-
-    return () => unsubscribe(); 
+    return () => unsubscribe();
   }, []);
 
-  const playlists = [
-    { id: 'Playlist Ariana', image: require('../assets/album-arianagrande.webp') },
-    { id: 'Playlist Adele', image: require('../assets/album-adele.jpg') },
-    { id: 'Playlist Olivia Rodrigo' , image: require( '../assets/album-olivia.jpg' ) },
-    { id: 'Playlist Michael Jackson' , image: require( '../assets/album-shawn.jpg' ) },
+  const plants = [
+    { id: '1', name: 'Samambaia', image: require('../assets/samambaia.jpeg'), description: 'Ideal para áreas internas e bem iluminadas.' },
+    { id: '2', name: 'Lírio-da-Paz', image: require('../assets/lirio-da-paz.jpg'), description: 'Planta elegante que floresce em ambientes frescos.' },
   ];
 
-  const playlistsMPB = [
-    { id: 1, title: 'Playlist Gilberto Gil', image: require('../assets/gilberto-gil.webp') },
-    { id: 2, title: 'Caetano Veloso', image: require('../assets/Caetano-Veloso.jpg') },
-    { id: 3, title: 'Chico Buarque', image: require('../assets/chicobuarque.webp') },
-   ];
-  
-  const playlistMPBconti = [
-    { id: 4, title: 'Playlist Rita Lee', image: require('../assets/rita-lee.jpg') },
-    { id: 5, title: 'Playlist Cazuza', image: require('../assets/album-cazuza.jpg') },
-    { id: 5, title: 'Playlist Luiz Gonzaga', image: require('../assets/luiz-gonzaga.jpg') },
+  const featuredPlants = [
+    { id: 1, name: 'Suculentas', image: require('../assets/suculentas.jpg') },
+    { id: 2, name: 'Bromélia', image: require('../assets/bromelia.jpeg') },
+    { id: 3, name: 'Orquídea', image: require('../assets/orquidea.jpg') },
+    { id: 4, name: 'Costela-de-Adão', image: require('../assets/costela-de-adao.jpg') },
   ];
-
-  const featuredAlbums = [
-  { id: 1, image: require('../assets/ze-felipe.jpg') },
-  { id: 2, image: require('../assets/leo-santana.webp') },
-  { id: 3, image: require('../assets/wesley-safadao.jpg') },
-  { id: 4, image: require('../assets/luan-city.jpg') },
-  { id: 5, image: require('../assets/gusttavo-lima.jpg') },
-  { id: 9, image: require('../assets/ana-castela.jpg') },
-  { id: 10, image: require('../assets/marilia-mendonca.jpg') },
-];
-
-  const featureAlbumsconti = [
-  { id: 1, image: require('../assets/Ze-Neto-Cristiano.jpeg') },
-  { id: 2, image: require('../assets/jorge-matheus.jpg') },
-  { id: 3, image: require('../assets/gustavo-mioto.jpg') },
-  { id: 4, image: require('../assets/matheus-kauan.jpg') },
-  { id: 5, image: require('../assets/maiara-maraisa.jpg') },
-  { id: 6, image: require('../assets/Israel-Rodolffo.jpg') },
-  { id: 7, image: require('../assets/Lauana-Prado.jpg') },
-  { id: 8, image: require('../assets/simoneses.webp') },
-  { id: 9, image: require('../assets/guilherme-e-benuto.webp') },
-  { id: 10, image: require('../assets/Felipe-Araújo.jpg') },
-];
-
-  const playlistsTRAP = [
-    
-  { id:1, image: require('../assets/album-veigh.jpg') },
-  { id:2, image: require('../assets/album-kayblack.webp') },
-  { id:3, image: require('../assets/album-matue.jpg') },
-  { id:4, image: require('../assets/album-teto.jpg') },
-];
-
 
   if (!isConnected) {
     return (
       <View style={styles.container}>
         <Text style={styles.heading}>Sem Conexão com a Internet</Text>
-        <Text style={styles.subheading}>Por favor, verifique sua conexão com a Internet e tente novamente.</Text>
+        <Text style={styles.subheading}>Por favor, verifique sua conexão e tente novamente.</Text>
       </View>
     );
   }
 
-  const playMusic = (title) => {
-    console.log('Reproduzindo música:', title);
+  const viewPlantDetails = (name) => {
+    console.log('Visualizando informações da planta:', name);
   };
 
-  const navigateToPagamento = () => {
-    navigation.navigate('Pagamento'); // Navegando para a tela de pagamento
+  const navigateToUpgrade = () => {
+    navigation.navigate('Upgrade');
   };
-
-  if (!isConnected) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.heading}>Sem Conexão com a Internet</Text>
-        <Text style={styles.subheading}>Por favor, verifique sua conexão com a Internet e tente novamente.</Text>
-      </View>
-    );
-  }
 
   return (
     <ScrollView style={styles.container}>
-      <Image source={require('../assets/logopulseplataform.png')} style={styles.logo} />
-      <Text style={styles.heading}>Ouça agora suas Músicas Favoritas</Text>
-      
-      <Text style={styles.sectionTitle}>Musicas Internacionais</Text>
+      {/* Cabeçalho */}
+      <View style={styles.header}>
+        <Image source={require('../assets/logo-floralis.png')} style={styles.logo} />
+        <View style={styles.nav}>
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <Text style={styles.navItem}>Home</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('MinhasPlantas')}>
+            <Text style={styles.navItem}>Sobre</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Relatorio')}>
+            <Text style={styles.navItem}>Relatório</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <Text style={styles.heading}>Explore o Mundo das Plantas</Text>
+
+      <Text style={styles.sectionTitle}>Plantas Populares</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {playlists.map(playlist => (
-          <MusicItem key={playlist.id} item={playlist} onPress={playMusic} />
+        {plants.map(plant => (
+          <PlantItem key={plant.id} item={plant} onPress={viewPlantDetails} />
         ))}
       </ScrollView>
 
-      <Text style={styles.sectionTitle}>Cantores Sertanejs:</Text>
+      <Text style={styles.sectionTitle}>Plantas em Catálogo</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {featuredAlbums.map(album => (
-          <MusicItem key={album.id} item={album} onPress={playMusic} />
+        {featuredPlants.map(plant => (
+          <PlantItem key={plant.id} item={plant} onPress={viewPlantDetails} />
         ))}
       </ScrollView>
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {featureAlbumsconti.map(album => (
-          <MusicItem key={album.id} item={album} onPress={playMusic} />
-        ))}
-      </ScrollView>
-      
-      <Text style={styles.sectionTitle}>Cantores MPB:</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {playlistsMPB.map(album => (
-          <MusicItem key={album.id} item={album} onPress={playMusic} />
-        ))}
-      </ScrollView>
-
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {playlistMPBconti.map(album => (
-          <MusicItem key={album.id} item={album} onPress={playMusic} />
-        ))}
-      </ScrollView>
-
-      <Text style={styles.sectionTitle}>Cantores Trap Brasileiro:</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {playlistsTRAP.map(album => (
-          <MusicItem key={album.id} item={album} onPress={playMusic} />
-        ))}
-      </ScrollView>
-      
-      <Text style={styles.sectionTitle}>Para ter acesso à mais músicas, faça Upgrade, agora</Text>
-      <TouchableOpacity style={styles.button} onPress={navigateToPagamento}>
-        <Text style={styles.back}>Fazer Upgrade</Text>
+      <Text style={styles.sectionTitle}>Obtenha dicas exclusivas para cuidar das suas plantas</Text>
+      <TouchableOpacity style={styles.button} onPress={navigateToUpgrade}>
+        <Text style={styles.buttonText}>Cuidados</Text>
       </TouchableOpacity>
-
     </ScrollView>
   );
 };
@@ -161,32 +96,69 @@ const TelaInicial = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
-    padding: 10,
-    color: 'white',
+    backgroundColor: '#F5FFF3', // Cor de fundo mais suave e natural
+    padding: -1,
+  },
+  header: {
+    backgroundColor: '#A5D6A7', // Verde suave para o cabeçalho
+    paddingTop: 20, // Reduzido o padding superior para um cabeçalho menor
+    paddingBottom: 10, // Reduzido o padding inferior
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    elevation: 3, // Sombra mais leve para o cabeçalho
+    borderBottomLeftRadius: 10, // Arredondamento mais sutil
+    borderBottomRightRadius: 10, // Arredondamento mais sutil
+  },
+  logo: {
+    width: 50, // Diminuído o tamanho do logo
+    height: 60, // Diminuído o tamanho do logo
+    resizeMode: 'contain', 
+  },
+  nav: {
+    flexDirection: 'row',
+  },
+  navItem: {
+    color: '#1B5E20', // Tom de verde mais forte para o texto
+    marginHorizontal: 15,
+    fontSize: 14, // Fonte menor
+    fontWeight: 'bold',
+    textTransform: 'uppercase', // Deixa os itens em maiúsculo para dar ênfase
+    paddingVertical: 4, // Menos espaço ao redor dos itens de navegação
+    borderBottomWidth: 1, // Linha mais fina embaixo
+    borderBottomColor: '#388E3C', // Adiciona uma linha embaixo para destaque
   },
   heading: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: 'white',
-    textAlign: 'center'
+    color: '#388E3C', // Verde forte para o título
+    textAlign: 'center',
   },
   subheading: {
-    fontSize: 18,
-    color: 'white',
-    textAlign: 'center'
+    fontSize: 16,
+    color: '#1B5E20',
+    textAlign: 'center',
+    marginBottom: 20,
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: 20,
     marginBottom: 10,
-    color: 'white',
+    color: '#388E3C', // Cor consistente com a tela Home
   },
   item: {
-    marginRight: 10,
-    marginBottom: 20,
+    backgroundColor: '#E8F5E9', // Cor de fundo suave para os itens
+    borderRadius: 10,
+    padding: 10,
+    marginRight: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4, // Leve sombra para os itens
   },
   image: {
     width: 150,
@@ -196,46 +168,23 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 5,
     fontSize: 16,
-    color: 'white',
+    color: '#388E3C', // Cor do texto do título
   },
-  artist: {
+  description: {
     fontSize: 14,
-    color: 'white',
-  },
-  playButton: {
-    position: 'absolute',
-    bottom: 5,
-    right: 5,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    borderRadius: 20,
-    width: 30,
-    height: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  playButtonText: {
-    color: 'white',
-    fontSize: 16,
-  },
-  logo: {
-    width: 90,
-    height: 40,
-    marginBottom: 20,
+    color: '#1B5E20', // Cor do texto de descrição
   },
   button: {
-    backgroundColor: '#333',
-    padding: 10,
+    backgroundColor: '#388E3C', // Cor do botão
+    padding: 15,
     borderRadius: 5,
-    alignSelf: 'flex-start',
-    marginBottom: 10,
+    alignSelf: 'center',
+    marginTop: 20,
   },
-  back: {
-    color: 'white',
+  buttonText: {
+    color: '#FFF',
     fontSize: 16,
-  },
-  section: {
-    
-
+    fontWeight: 'bold',
   },
 });
 

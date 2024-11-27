@@ -13,7 +13,7 @@ function UserProvider({children})
     {
         if( email == "ana.silva106@icloud.com" && senha == "121257@Ana" ){
             await AsynStorage.setItem( "usuario" , "Ana Clara" );
-            setLogado( true );    
+            setLogado( true );
         }
     }
     async function infoUsuario()
